@@ -67,3 +67,5 @@ exten => 101,1,Goto(anatoliy,1)
 exten => iaxtest,1,Dial(IAX2/iax-test)
 exten => iaxtest,2,HangUp()
 exten => 102,1,Goto(iaxtest,1)
+
+References: https://www.asteriskguru.com/tutorials/iax_conf.html
