@@ -1,0 +1,69 @@
+# nano /etc/asterisk/iax.conf
+
+iax.conf:
+
+[general]
+bandwidth=low
+disallow=lpc10
+jitterbuffer=no
+forcejitterbuffer=no
+tos=lowdelay
+autokill=yes
+
+[guest]
+type=user
+context=test
+callerid="Guest IAX User"
+
+[anatoliy]
+callerid=Anatoliy K.
+username=anatoliy
+secret=anatoliy
+type=friend
+host=dynamic
+context=test
+disallow=all
+allow=ulaw
+allow=alaw
+allow=gsm
+
+[ivan]
+callerid=Ivan T.
+username=ivan
+;secret=ivan
+dbsecret=Password/ivan_iax
+type=friend
+host=dynamic
+context=test
+
+[iax-test]
+type=peer
+username=iax-test
+host=dynamic
+trunk=yes
+context=test
+
+# nano /etc/asterisk/extensions.conf
+
+extensions.conf:
+
+[general]
+static=yes
+writeprotect=no
+autofallthrough=yes
+
+[globals]
+;none
+
+[test]
+exten => ivan,1,Dial(IAX2/ivan)
+exten => ivan,2,HangUp()
+exten => 100,1,Goto(ivan,1)
+
+exten => anatoliy,1,Dial(IAX2/anatoliy)
+exten => anatoliy,2,HangUp()
+exten => 101,1,Goto(anatoliy,1)
+
+exten => iaxtest,1,Dial(IAX2/iax-test)
+exten => iaxtest,2,HangUp()
+exten => 102,1,Goto(iaxtest,1)
