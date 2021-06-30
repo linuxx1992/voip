@@ -1,6 +1,7 @@
-# nano /etc/asterisk/iax.conf
+# nano /etc/asterisk/iax.conf -> For Debian < 9
+# nano /etc/asterisk/users.conf -> For Debian > 9
 
-iax.conf:
+iax.conf (users.conf):
 
 [general]
 bandwidth=low
